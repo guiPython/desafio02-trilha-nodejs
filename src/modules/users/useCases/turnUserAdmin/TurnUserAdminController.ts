@@ -7,11 +7,11 @@ class TurnUserAdminController {
 
   handle(request: Request, response: Response): Response {
     try{
-      const {user_id} = request.body;
-      const user = this.turnUserAdminUseCase.execute(user_id);
+      const {user_id} = request.params;
+      const user = this.turnUserAdminUseCase.execute({user_id});
       return response.json(user);
     }catch{
-      return response.status(404).send();
+      return response.status(404).send({ error: "mensagem do erro" });
     }
   }
 }

@@ -7,11 +7,11 @@ class ListAllUsersController {
 
   handle(request: Request, response: Response): Response {
     try{
-      const{user_id} = request.body;
+      const user_id = (request.headers.user_id) as string;
       const users = this.listAllUsersUseCase.execute({user_id});
-      return response.json(users);
+      return response.send(users);
     }catch{
-      return response.status(404).send();
+      return response.status(400).send({ error: "mensagem do erro" });
     }
   }
 }
